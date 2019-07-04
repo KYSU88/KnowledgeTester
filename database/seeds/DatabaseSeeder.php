@@ -19,5 +19,21 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('adminadmin123'),
             'role_id' => 2
         ]);
+
+        DB::table('roles')->insert([
+           'name' => 'guest'
+        ]);
+
+        DB::table('roles')->insert([
+            'name' => 'admin'
+        ]);
+
+        DB::table('roles')->insert([
+            'name' => 'teacher'
+        ]);
+
+        DB::table('roles')->insert([
+            'name' => 'student'
+        ]);
     }
 }

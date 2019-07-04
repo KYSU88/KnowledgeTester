@@ -2,11 +2,6 @@
 
 @section('content')
 <div class="container">
-    @if( auth()->user()->role->name === "guest")
-        guest
-    @endif
-    @if( auth()->user()->role->name === "admin")
-        admin
-    @endif
+    home blade
 </div>
 @endsection

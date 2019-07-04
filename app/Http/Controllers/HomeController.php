@@ -16,6 +16,7 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('user-role');
     }
 
     /**
@@ -25,8 +26,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $user = User::first();
-        $roles = Role::all();
-        return view('home', compact('user', 'roles'));
+
+        return view('home');
     }
 }
