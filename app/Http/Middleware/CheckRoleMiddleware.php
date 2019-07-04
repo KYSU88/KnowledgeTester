@@ -16,12 +16,17 @@ class CheckRoleMiddleware
      */
     public function handle($request, Closure $next)
     {
-        //User role is admin
+        //User role is admins
         if(Auth::check() && Auth::user()->role->name === "admin")
         {
-          dd('dziala');
+          return response()->view('admins.index');
         }
-        //default redirect
+        // User role is guest
+        if(Auth::check() && Auth::user()->role->name === "guest")
+        {
+            return response()->view('home');
+        }
+
         return $next($request);
     }
 }
