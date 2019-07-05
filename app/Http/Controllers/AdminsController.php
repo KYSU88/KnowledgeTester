@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Role;
 use Illuminate\Http\Request;
+use App\User;
 
 class AdminsController extends Controller
 {
@@ -18,7 +20,8 @@ class AdminsController extends Controller
      */
     public function index()
     {
-        return view('admins.index');
+        $users = User::all();
+        return view('admins.index', compact('users'));
     }
 
     /**
@@ -48,9 +51,9 @@ class AdminsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        //
+        return view('admins.show', compact('user'));
     }
 
     /**
@@ -59,9 +62,10 @@ class AdminsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        $roles = Role::all();
+        return view('admins.edit', compact('user', 'roles'));
     }
 
     /**
@@ -71,9 +75,18 @@ class AdminsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(User $user)
     {
-        //
+        $data = request()->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'role_id' => 'required'
+        ]);
+        // form returns id as a string cast to int
+        $user->role_id = (int)request()->role_id;
+
+        $user->update($data);
+        return redirect('/admins');
     }
 
     /**
@@ -82,8 +95,9 @@ class AdminsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return redirect('/admins');
     }
 }

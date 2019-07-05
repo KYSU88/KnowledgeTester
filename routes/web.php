@@ -17,7 +17,12 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('admins', 'AdminController@index');
+// Admin routes
+Route::get('admins', 'AdminsController@index');
+Route::get('admins/{user}', 'AdminsController@show');
+Route::get('admins/{user}/edit', 'AdminsController@edit');
+Route::patch('admins/{user}', 'AdminsController@update');
+Route::delete('admins/{user}', 'AdminsController@destroy');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
