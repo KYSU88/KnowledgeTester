@@ -86,7 +86,7 @@ class AdminsController extends Controller
         $user->role_id = (int)request()->role_id;
 
         $user->update($data);
-        return redirect('/admins');
+        return redirect('/admins')->with('success', 'User updated');
     }
 
     /**
@@ -98,6 +98,6 @@ class AdminsController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-        return redirect('/admins');
+        return redirect('/admins')->with('success', 'User deleted');
     }
 }
