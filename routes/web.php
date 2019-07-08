@@ -23,6 +23,8 @@ Route::get('admins/{user}', 'AdminsController@show');
 Route::get('admins/{user}/edit', 'AdminsController@edit');
 Route::patch('admins/{user}', 'AdminsController@update');
 Route::delete('admins/{user}', 'AdminsController@destroy');
+// Teacher routes
+Route::get('teachers', 'TeachesController@index');
 
 Route::get('/home', 'HomeController@index')->name('home');
 

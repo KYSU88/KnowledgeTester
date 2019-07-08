@@ -26,6 +26,11 @@ class CheckRoleMiddleware
         {
             return response()->view('home');
         }
+        // User role is guest
+        if(Auth::check() && Auth::user()->role->name === "teacher")
+        {
+            return response()->view('teachers.index');
+        }
 
         return $next($request);
     }
